@@ -1,12 +1,17 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { namedLazy } from "shared/libs/namedLazy";
 
-const TestPage = namedLazy(() => import("./test"), "TestPage");
+const TaskListPage = namedLazy(() => import("./task-list"), "TaskListPage");
+const TaskDetailsPage = namedLazy(
+  () => import("./task-details"),
+  "TaskDetailsPage"
+);
 
 export const Routing = () => {
   return (
     <Routes>
-      <Route index element={<TestPage />} />
+      <Route index element={<TaskListPage />} />
+      <Route path=":taskId" element={<TaskDetailsPage />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

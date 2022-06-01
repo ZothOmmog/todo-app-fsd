@@ -1,3 +1,3 @@
 export enum LsKey {
-  tasks = "tasks",
+  tasks = 'tasks',
 }

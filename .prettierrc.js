@@ -1,0 +1,20 @@
+module.exports = {
+  printWidth: 80,
+  tabWidth: 2,
+  trailingComma: 'all',
+  singleQuote: true,
+  semi: true,
+  importOrder: [
+    '<THIRD_PARTY_MODULES>',
+    '^app$',
+    '^pages$',
+    '^widgets$',
+    '^features$',
+    '^entities$',
+    '^shared$',
+    '\\.\\.',
+    '^[./]',
+  ],
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
+};

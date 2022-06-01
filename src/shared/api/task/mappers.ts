@@ -1,4 +1,4 @@
-import { TaskDetails, TaskShort } from "./types";
+import { TaskDetails, TaskShort } from './types';
 
 export const mapResTaskShortList = (tasks: TaskDetails[]): TaskShort[] => {
   return tasks.map((task) => ({
@@ -10,7 +10,7 @@ export const mapResTaskShortList = (tasks: TaskDetails[]): TaskShort[] => {
 
 export const mapReqToggleTask = (
   task: TaskDetails,
-  tasks: TaskDetails[]
+  tasks: TaskDetails[],
 ): TaskDetails[] => {
   return [
     ...tasks.filter(({ id }) => id !== task.id),

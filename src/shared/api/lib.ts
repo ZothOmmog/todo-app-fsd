@@ -1,4 +1,4 @@
-import { LsKey } from "./config";
+import { LsKey } from './config';
 
 export const getLsValue = <T>(key: LsKey): T | undefined => {
   const value = localStorage[key] as string | undefined;

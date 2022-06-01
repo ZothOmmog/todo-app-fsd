@@ -48,8 +48,10 @@
     ]
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "3.2.0",
     "@types/compose-function": "0.0.30",
     "axios": "0.27.2",
-    "effector-logger": "0.13.4"
+    "effector-logger": "0.13.4",
+    "prettier": "2.6.2"
   }
 }

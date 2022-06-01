@@ -1,8 +1,9 @@
-import { LsKey } from "../config";
-import { getLsValue, setLsValue, wait } from "../lib";
-import { incorrectTaskIdError } from "./config";
-import * as mappers from "./mappers";
-import { TaskDetails, TaskShort } from "./types";
+import { LsKey } from '../config';
+import { getLsValue, setLsValue, wait } from '../lib';
+
+import { incorrectTaskIdError } from './config';
+import * as mappers from './mappers';
+import { TaskDetails, TaskShort } from './types';
 
 export const getTaskDetailsList = async (): Promise<TaskDetails[]> => {
   await wait();

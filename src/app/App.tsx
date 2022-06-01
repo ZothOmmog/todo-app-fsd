@@ -1,6 +1,13 @@
-import React from "react";
-import { Providers } from "./Providers";
+import React from 'react';
+
+import { Routes } from 'pages';
+
+import { Providers } from './Providers';
 
 export const App: React.FC = () => {
-  return <Providers>App</Providers>;
+  return (
+    <Providers>
+      <Routes />
+    </Providers>
+  );
 };

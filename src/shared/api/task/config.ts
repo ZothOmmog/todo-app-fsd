@@ -1,1 +1,1 @@
-export const incorrectTaskIdError = "incorrectTaskIdError";
+export const incorrectTaskIdError = 'incorrectTaskIdError';

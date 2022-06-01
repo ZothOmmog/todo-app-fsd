@@ -1,4 +1,4 @@
-import { combine, createEffect, createStore, sample } from 'effector';
+import { combine, createEffect, createStore, forward, sample } from 'effector';
 
 import { taskApi } from 'shared/api';
 
@@ -11,6 +11,10 @@ export const addTaskFx = createEffect(
     return taskApi.api.addTask(task);
   },
 );
+
+export const toggleTaskFx = createEffect(async (id: string) => {
+  return taskApi.api.toggleTask(id);
+});
 
 export const $taskShortList = createStore<taskApi.types.TaskShort[] | null>(
   null,
@@ -38,7 +42,7 @@ sample({
   target: $taskShortList,
 });
 
-sample({
-  source: addTaskFx.done,
-  target: getTaskListFx,
+forward({
+  from: [addTaskFx.done, toggleTaskFx.done],
+  to: getTaskListFx,
 });

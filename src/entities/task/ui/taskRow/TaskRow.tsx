@@ -1,12 +1,13 @@
+import { Space } from 'antd';
 import { useStoreMap } from 'effector-react';
 import React from 'react';
 
 import { $taskShortMap } from '../../model';
 
-type TaskRowProps = { id: string };
+type TaskRowProps = { id: string; Actions: React.FC<{ id: string }> };
 
 const TaskRow: React.FC<TaskRowProps> = (props) => {
-  const { id } = props;
+  const { id, Actions } = props;
 
   const title = useStoreMap({
     store: $taskShortMap,
@@ -14,7 +15,14 @@ const TaskRow: React.FC<TaskRowProps> = (props) => {
     keys: [id],
   });
 
-  return <div>{title}</div>;
+  return (
+    <div>
+      <Space direction="horizontal" size="small">
+        <Actions id={id} />
+        {title}
+      </Space>
+    </div>
+  );
 };
 
 const TaskRowMemo = React.memo(TaskRow);

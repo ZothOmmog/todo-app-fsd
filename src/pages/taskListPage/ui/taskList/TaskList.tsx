@@ -1,14 +1,16 @@
-import { Store } from 'effector';
-import { useList } from 'effector-react';
+import { useStore } from 'effector-react';
 import React from 'react';
 
 import { TaskRow, taskModel } from 'entities/task';
 
-import { taskApi } from 'shared/api';
-
 export const TaskList: React.FC = () => {
-  return useList(taskModel.$taskShortList as Store<taskApi.types.TaskShort[]>, {
-    fn: (task) => <TaskRow title={task.title} />,
-    getKey: (task) => task.id,
-  });
+  const ids = useStore(taskModel.$taskShortIds);
+
+  let list: React.ReactNode = 'Список задач не был загружен';
+
+  if (ids !== null) {
+    list = ids.map((id) => <TaskRow key={id} id={id} />);
+  }
+
+  return <div>{list}</div>;
 };

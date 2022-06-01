@@ -23,6 +23,15 @@ export const $isLoadingTaskShortList = combine(
 export const $taskShortIds = $taskShortList.map(
   (list) => list?.map((task) => task.id) ?? null,
 );
+export const $taskShortMap = $taskShortList.map((list) => {
+  return (
+    list?.reduce((acc, item) => {
+      acc[item.id] = item;
+
+      return acc;
+    }, {} as Record<string, taskApi.types.TaskShort>) ?? null
+  );
+});
 
 sample({
   source: getTaskListFx.doneData,

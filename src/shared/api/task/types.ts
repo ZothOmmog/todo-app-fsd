@@ -1,5 +1,5 @@
 export type TaskShort = {
-  id: number;
+  id: string;
   title: string;
   isCompleted: boolean;
 };

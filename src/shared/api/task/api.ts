@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { LsKey } from '../config';
 import { getLsValue, setLsValue, wait } from '../lib';
 
@@ -21,7 +23,7 @@ export const getTaskShortList = async (): Promise<TaskShort[]> => {
   return mappers.mapResTaskShortList(tasks);
 };
 
-export const getTaskById = async (id: number): Promise<TaskDetails> => {
+export const getTaskById = async (id: string): Promise<TaskDetails> => {
   const tasks = await getTaskDetailsList();
   const task = tasks.find((task) => task.id === id);
 
@@ -30,9 +32,17 @@ export const getTaskById = async (id: number): Promise<TaskDetails> => {
   return task;
 };
 
-export const toggleTask = async (id: number) => {
+export const toggleTask = async (id: string) => {
   const tasks = await getTaskDetailsList();
   const task = await getTaskById(id);
 
   setLsValue(LsKey.tasks, mappers.mapReqToggleTask(task, tasks));
+};
+
+export const addTask = async (task: Omit<TaskDetails, 'id'>) => {
+  const tasks = await getTaskDetailsList();
+
+  tasks.push({ ...task, id: uuidv4() });
+
+  setLsValue(LsKey.tasks, tasks);
 };

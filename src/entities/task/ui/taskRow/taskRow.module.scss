@@ -1,0 +1,11 @@
+.meta {
+  :global(.ant-card-meta-detail) {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    & > :nth-child(n) {
+      margin: 0;
+    }
+  }
+}

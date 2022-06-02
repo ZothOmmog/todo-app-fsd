@@ -19,10 +19,14 @@ export const toggleTaskFx = createEffect(async (id: string) => {
 export const $taskShortList = createStore<taskApi.types.TaskShort[] | null>(
   null,
 );
-export const $isLoadingTaskShortList = combine(
-  $taskShortList,
+export const $isReadyTaskShortList = $taskShortList.map(
+  (list) => list !== null,
+);
+export const $isPengindTaskShortList = combine(
   getTaskListFx.pending,
-  (list, isPending) => (list === null && isPending) || list === null,
+  toggleTaskFx.pending,
+  addTaskFx.pending,
+  (...pendings) => pendings.some(Boolean),
 );
 export const $taskShortIds = $taskShortList.map(
   (list) => list?.map((task) => task.id) ?? null,

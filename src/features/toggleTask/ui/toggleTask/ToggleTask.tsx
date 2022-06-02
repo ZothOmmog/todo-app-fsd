@@ -1,5 +1,5 @@
-import { Checkbox } from 'antd';
-import { useStoreMap } from 'effector-react';
+import { Checkbox, Spin } from 'antd';
+import { useStore, useStoreMap } from 'effector-react';
 import React from 'react';
 
 import { taskModel } from 'entities/task';
@@ -15,11 +15,17 @@ export const ToggleTaskShort: React.FC<ToggleTaskProps> = (props) => {
     keys: [id],
   });
 
+  const isPending = useStore(taskModel.$isPengindTaskShortList);
+
   const handleToggle = React.useCallback(() => {
     taskModel.toggleTaskFx(id);
   }, [id]);
 
   if (isCompleted === null) return <>Задача не найдена</>;
 
-  return <Checkbox checked={isCompleted} onChange={handleToggle} />;
+  return (
+    <Spin spinning={isPending} size="small">
+      <Checkbox checked={isCompleted} onChange={handleToggle} />
+    </Spin>
+  );
 };

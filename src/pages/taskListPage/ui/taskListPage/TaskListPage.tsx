@@ -10,17 +10,17 @@ import { TaskList } from '../taskList';
 
 export const TaskListPage: React.FC = () => {
   useGate(TaskListPageGate);
-  const isLoaging = useStore(taskModel.$isLoadingTaskShortList);
+  const isReady = useStore(taskModel.$isReadyTaskShortList);
 
   return (
     <div>
-      {isLoaging ? (
-        <TaskListLoading />
-      ) : (
+      {isReady ? (
         <>
           <TaskList />
           <AddTaskButton />
         </>
+      ) : (
+        <TaskListLoading />
       )}
     </div>
   );

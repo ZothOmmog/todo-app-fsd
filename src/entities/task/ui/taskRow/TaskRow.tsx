@@ -1,4 +1,4 @@
-import { Space } from 'antd';
+import { Card, Space } from 'antd';
 import { useStoreMap } from 'effector-react';
 import React from 'react';
 
@@ -17,10 +17,16 @@ const TaskRow: React.FC<TaskRowProps> = (props) => {
 
   return (
     <div>
-      <Space direction="horizontal" size="small">
-        <Actions id={id} />
-        {title}
-      </Space>
+      <Card>
+        <Card.Meta
+          title={
+            <Space size="small">
+              <Actions id={id} />
+              {title}
+            </Space>
+          }
+        />
+      </Card>
     </div>
   );
 };

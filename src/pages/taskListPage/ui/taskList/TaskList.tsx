@@ -1,3 +1,4 @@
+import { Space } from 'antd';
 import { useStore } from 'effector-react';
 import React from 'react';
 
@@ -16,5 +17,5 @@ export const TaskList: React.FC = () => {
     ));
   }
 
-  return <div>{list}</div>;
+  return <Space direction="vertical">{list}</Space>;
 };

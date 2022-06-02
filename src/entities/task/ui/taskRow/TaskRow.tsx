@@ -1,6 +1,9 @@
 import { Card, Space } from 'antd';
+import { format } from 'date-fns';
 import { useStoreMap } from 'effector-react';
 import React from 'react';
+
+import { dateTimeFormat } from 'shared/config';
 
 import { $taskShortMap } from '../../model';
 
@@ -11,9 +14,19 @@ type TaskRowProps = { id: string; Actions: React.FC<{ id: string }> };
 const TaskRow: React.FC<TaskRowProps> = (props) => {
   const { id, Actions } = props;
 
-  const title = useStoreMap({
+  const { title, dateTime } = useStoreMap({
     store: $taskShortMap,
-    fn: (map) => map?.[id].title ?? 'Задача не найдена',
+    fn: (map) => {
+      const task = map?.[id] ?? null;
+
+      if (task === null)
+        return { title: 'Задача не найдена', dateTime: 'Задача не найдена' };
+
+      return {
+        title: task.title,
+        dateTime: format(new Date(task.dateTime), dateTimeFormat),
+      };
+    },
     keys: [id],
   });
 
@@ -28,7 +41,7 @@ const TaskRow: React.FC<TaskRowProps> = (props) => {
               {title}
             </Space>
           }
-          description="20.12.2021 12:35"
+          description={dateTime}
         />
       </Card>
     </div>

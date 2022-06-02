@@ -4,6 +4,7 @@ export const mapResTaskShortList = (tasks: TaskDetails[]): TaskShort[] => {
   return tasks.map((task) => ({
     id: task.id,
     isCompleted: task.isCompleted,
+    dateTime: task.dateTime,
     title: task.title,
   }));
 };

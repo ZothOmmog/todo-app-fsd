@@ -18,5 +18,6 @@ export const AddTaskButton: React.FC = () => {
 const handleClick = addTaskFx.prepend(() => ({
   description: 'task description',
   isCompleted: false,
+  dateTime: new Date().toISOString(),
   title: 'task title',
 }));

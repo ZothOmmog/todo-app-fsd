@@ -32,7 +32,7 @@ export const TaskListPage: React.FC = () => {
             </Row>
           </Layout.Header>
           <Layout.Content className={style.content}>
-            <TaskList />
+            <TaskList className={style.taskList} />
           </Layout.Content>
         </Layout>
       ) : (

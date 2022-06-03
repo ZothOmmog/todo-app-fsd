@@ -2,6 +2,8 @@ import { Col, Layout, Row } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import React from 'react';
 
+import { TaskList } from 'widgets/taskList';
+
 import { AddTaskButton } from 'features/addTask';
 
 import { TaskListLoading, taskModel } from 'entities/task';
@@ -9,7 +11,6 @@ import { TaskListLoading, taskModel } from 'entities/task';
 import { Logo } from 'shared/ui';
 
 import { TaskListPageGate } from '../../model';
-import { TaskList } from '../taskList';
 
 import style from './taskListPage.module.scss';
 

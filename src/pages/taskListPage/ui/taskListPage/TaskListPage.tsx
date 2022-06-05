@@ -23,7 +23,7 @@ export const TaskListPage: React.FC = () => {
       {isReady ? (
         <Layout className={style.root}>
           <Layout.Header>
-            <Row align="middle" justify="space-between">
+            <Row align="middle" wrap={false} justify="space-between">
               <Col>
                 <Logo />
               </Col>

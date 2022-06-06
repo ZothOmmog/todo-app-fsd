@@ -1,3 +1,4 @@
+import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useStore } from 'effector-react';
 import React from 'react';
@@ -9,9 +10,12 @@ export const AddTaskButton: React.FC = () => {
   const isPending = useStore(taskModel.$isPengindTaskShortList);
 
   return (
-    <Button loading={isPending} onClick={handleClick} type="primary">
-      Add task
-    </Button>
+    <Button
+      icon={<PlusOutlined />}
+      loading={isPending}
+      onClick={handleClick}
+      type="primary"
+    />
   );
 };
 

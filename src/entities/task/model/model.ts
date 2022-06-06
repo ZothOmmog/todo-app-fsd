@@ -7,8 +7,12 @@ export const getTaskListFx = createEffect(async () => {
 });
 
 export const addTaskFx = createEffect(
-  async (task: Omit<taskApi.types.TaskDetails, 'id'>) => {
-    return taskApi.api.addTask(task);
+  async (values: Pick<taskApi.types.TaskDetails, 'description' | 'title'>) => {
+    return taskApi.api.addTask({
+      ...values,
+      dateTime: new Date().toISOString(),
+      isCompleted: false,
+    });
   },
 );
 

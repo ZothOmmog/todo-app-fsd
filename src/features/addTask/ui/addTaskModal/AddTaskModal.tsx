@@ -10,8 +10,6 @@ import { InputFormik, TextAreaFormik, TextDanger } from 'shared/ui';
 import { initialValues } from '../../config';
 import { addTaskModel } from '../../model';
 
-let resetFormPrev = () => {};
-
 export const AddTaskModal: React.FC = () => {
   const isVisible = useStore(addTaskModel.modal.$isVisible);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -46,6 +44,8 @@ export const AddTaskModal: React.FC = () => {
       visible={isVisible}
       onCancel={handleClose}
       afterClose={resetForm}
+      okText="Добавить"
+      cancelText="Отмена"
       onOk={submitForm}
       okButtonProps={okButtonProps}
     >

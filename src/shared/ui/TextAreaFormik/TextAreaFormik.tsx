@@ -1,8 +1,9 @@
 import { Input } from 'antd';
-import { FieldInputProps, useField } from 'formik';
+import { ErrorMessage, FieldInputProps, useField } from 'formik';
 import React from 'react';
 
 import { FloatLabel } from '../floatLabel';
+import { TextDanger } from '../textDanger';
 
 type TextAreaFormikProps = Omit<
   React.ComponentProps<typeof Input.TextArea>,
@@ -10,15 +11,23 @@ type TextAreaFormikProps = Omit<
 > & {
   name: string;
   label: string;
+  isRequired?: boolean;
 };
 
 export const TextAreaFormik: React.FC<TextAreaFormikProps> = (props) => {
-  const { label, ...otherProps } = props;
-  const [inputProps] = useField(props.name);
+  const { label, isRequired, ...otherProps } = props;
+  const [inputProps, { touched, error }] = useField(props.name);
+  const status = touched && error ? 'error' : undefined;
 
   return (
-    <FloatLabel label={label} value={inputProps.value}>
-      <Input.TextArea {...otherProps} {...inputProps} />
+    <FloatLabel
+      status={status}
+      label={label}
+      value={inputProps.value}
+      isRequired={isRequired}
+    >
+      <Input.TextArea status={status} {...otherProps} {...inputProps} />
+      <ErrorMessage name={inputProps.name} component={TextDanger} />
     </FloatLabel>
   );
 };

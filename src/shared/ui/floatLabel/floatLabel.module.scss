@@ -12,12 +12,20 @@
   left: 12px;
   top: 10px;
   transition: 0.2s ease all;
-}
 
-.labelFloat {
-  top: -7px;
-  background-color: white;
-  font-size: 11px;
-  line-height: 11px;
-  padding: 1px;
+  &.labelFloat {
+    top: -7px;
+    background-color: white;
+    font-size: 11px;
+    line-height: 11px;
+    padding: 1px;
+  }
+
+  &.required {
+    &::before {
+      margin-right: 2px;
+      content: '*';
+      color: red;
+    }
+  }
 }

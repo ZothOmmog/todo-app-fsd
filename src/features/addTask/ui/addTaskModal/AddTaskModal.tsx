@@ -1,64 +1,50 @@
 import { Modal } from 'antd';
 import { useStore } from 'effector-react';
-import { ErrorMessage, Form, Formik, FormikProps } from 'formik';
+import { Form, Formik } from 'formik';
 import React from 'react';
 
 import { taskModel } from 'entities/task';
 
-import { InputFormik, TextAreaFormik, TextDanger } from 'shared/ui';
+import { InputFormik, TextAreaFormik } from 'shared/ui';
 
 import { initialValues } from '../../config';
-import { addTaskModel } from '../../model';
+import { addTaskHooks, addTaskModel } from '../../model';
 
 export const AddTaskModal: React.FC = () => {
   const isVisible = useStore(addTaskModel.modal.$isVisible);
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [isDirty, setIsDirty] = React.useState(false);
-  const [resetForm, setResetForm] = React.useState<(() => void) | undefined>();
-  const [submitForm, setSubmitForm] = React.useState<
-    (() => void) | undefined
-  >();
+  const formikCtx = addTaskHooks.useFormikOutside<FormValues>();
+  const validationShema = addTaskHooks.useValidationShema();
 
   const handleClose = React.useCallback(() => addTaskModel.modal.hide(), []);
 
   const okButtonProps = React.useMemo(
     () => ({
-      loading: isSubmitting,
-      disabled: !isDirty,
+      loading: formikCtx.isSubmitting,
+      disabled: !formikCtx.isDirty,
     }),
-    [isSubmitting, isDirty],
+    [formikCtx.isDirty, formikCtx.isSubmitting],
   );
-
-  const innerRef = React.useCallback((elem: FormikProps<FormValues> | null) => {
-    if (!elem) return;
-    setIsSubmitting(elem.isSubmitting);
-    setIsDirty(elem.dirty);
-
-    setResetForm((prev) => prev ?? elem.resetForm);
-    setSubmitForm((prev) => prev ?? elem.submitForm);
-  }, []);
 
   return (
     <Modal
       title="Добавление задачи"
       visible={isVisible}
       onCancel={handleClose}
-      afterClose={resetForm}
+      afterClose={formikCtx.resetForm}
       okText="Добавить"
       cancelText="Отмена"
-      onOk={submitForm}
+      onOk={formikCtx.submitForm}
       okButtonProps={okButtonProps}
     >
       <Formik<FormValues>
         initialValues={initialValues}
         onSubmit={taskModel.addTaskFx}
-        innerRef={innerRef}
+        innerRef={formikCtx.innerRef}
+        validationSchema={validationShema}
       >
         <Form>
-          <InputFormik label="Название" name="title" />
-          <ErrorMessage name="title" component={TextDanger} />
-          <TextAreaFormik name="description" label="Описание" />
-          <ErrorMessage name="title" component={TextDanger} />
+          <InputFormik isRequired label="Название" name="title" />
+          <TextAreaFormik isRequired name="description" label="Описание" />
         </Form>
       </Formik>
     </Modal>

@@ -4,6 +4,7 @@ import React from 'react';
 import { Routes } from 'pages';
 
 import { Providers } from './Providers';
+import './config';
 
 export const App: React.FC = () => {
   return (

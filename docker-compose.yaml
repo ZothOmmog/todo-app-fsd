@@ -1,6 +1,6 @@
 services:
   todo:
-    build: .
+    build: dev.Dockerfile
     ports:
       - '3000:3000'
     volumes:

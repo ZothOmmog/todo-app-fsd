@@ -1,6 +1,6 @@
 services:
-  todo:
-    build: dev.Dockerfile
+  todo-app-fsd:
+    build: .
     ports:
       - '3000:3000'
     volumes:

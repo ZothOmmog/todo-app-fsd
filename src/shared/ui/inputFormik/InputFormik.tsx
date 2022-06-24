@@ -1,11 +1,11 @@
 import { Input, InputProps } from 'antd';
-import { ErrorMessage, FieldInputProps, useField } from 'formik';
+import { ErrorMessage, useField } from 'formik';
 import React from 'react';
 
 import { FloatLabel } from '../floatLabel';
 import { TextDanger } from '../textDanger';
 
-type InputFormikProps = Omit<InputProps, keyof FieldInputProps<unknown>> & {
+type InputFormikProps = InputProps & {
   name: string;
   label: string;
   isRequired?: boolean;
@@ -22,6 +22,7 @@ export const InputFormik: React.FC<InputFormikProps> = (props) => {
       label={label}
       value={inputProps.value}
       isRequired={isRequired}
+      isDisabled={otherProps.disabled}
     >
       <Input status={status} {...otherProps} {...inputProps} />
       <ErrorMessage name={inputProps.name} component={TextDanger} />

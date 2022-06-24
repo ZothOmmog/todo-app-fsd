@@ -10,14 +10,20 @@ type FloatLabelProps = React.PropsWithChildren<{
   value?: string;
   status?: 'error';
   isRequired?: boolean;
+  isDisabled?: boolean;
 }>;
 
 export const FloatLabel: React.FC<FloatLabelProps> = (props) => {
-  const { children, label, value, status, isRequired } = props;
+  const { children, label, value, status, isRequired, isDisabled } = props;
   const isError = status === 'error';
   const [focus, setFocus] = React.useState(false);
 
-  const labelClass = cn(style.label, {
+  const classRoot = cn(style.root, {
+    [style.active]: focus,
+    [style.disabled]: isDisabled,
+  });
+
+  const classLabel = cn(style.label, {
     [style.labelFloat]: focus || (value && value.length !== 0),
     [style.required]: isRequired,
   });
@@ -26,9 +32,9 @@ export const FloatLabel: React.FC<FloatLabelProps> = (props) => {
   const onFocus = useCallback(() => setFocus(true), []);
 
   return (
-    <div className={style.root} onBlur={onBlur} onFocus={onFocus}>
+    <div className={classRoot} onBlur={onBlur} onFocus={onFocus}>
       {children}
-      <label className={labelClass}>
+      <label className={classLabel}>
         {isError ? <TextDanger>{label}</TextDanger> : label}
       </label>
     </div>

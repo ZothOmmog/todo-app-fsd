@@ -1,31 +1,47 @@
 .root {
   position: relative;
   margin-bottom: 12px;
-}
 
-.label {
-  font-size: 12px;
-  line-height: 12px;
-  font-weight: normal;
-  position: absolute;
-  pointer-events: none;
-  left: 12px;
-  top: 10px;
-  transition: 0.2s ease all;
-
-  &.labelFloat {
-    top: -7px;
-    background-color: white;
-    font-size: 11px;
-    line-height: 11px;
-    padding: 1px;
+  &:hover:not(.disabled) .label {
+    color: #40a9ff;
   }
 
-  &.required {
-    &::before {
-      margin-right: 2px;
-      content: '*';
-      color: red;
+  &.active:not(.disabled) .label {
+    color: #40a9ff;
+  }
+
+  &.disabled .label {
+    color: #00000040;
+  }
+
+  &:not(.active) .label {
+    color: #00000073;
+  }
+
+  .label {
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 12px;
+    top: 10px;
+    transition: 0.2s ease all;
+
+    &.labelFloat {
+      top: -7px;
+      background-color: white;
+      font-size: 11px;
+      line-height: 11px;
+      padding: 1px;
+    }
+
+    &.required {
+      &::before {
+        margin-right: 2px;
+        content: '*';
+        color: red;
+      }
     }
   }
 }
